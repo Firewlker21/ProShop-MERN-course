@@ -3,13 +3,22 @@
   "version": "1.0.0",
   "description": "MERN ecommerce course",
   "main": "server.js",
+  "type": "module",
   "scripts": {
-    "start": "nodemon backend/server"
+    "start": "node backend/server",
+    "server": "nodemon backend/server",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "B Richter",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.17.1",
+    "axios": "^0.20.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
     "nodemon": "^2.0.4"
   }
 }
