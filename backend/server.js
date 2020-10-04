@@ -1,10 +1,13 @@
 import express from 'express'
 import products from './data/products.js'
 import dotenv from 'dotenv'
+import connectDB from '../backend/config/db.js'
 
 dotenv.config()
 
 const app = express()
+
+connectDB()
 
 app.get('/', (req, res) => {
   res.send('API running with nodemon')
