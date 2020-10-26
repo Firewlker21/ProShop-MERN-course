@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Product from '../components/Product'
 import { Row, Col } from 'react-bootstrap'
@@ -19,7 +19,7 @@ const HomeScreen = () => {
     <>
       <h1>Latest Products</h1>
       {loading ? (
-       <Loader />
+        <Loader />
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (

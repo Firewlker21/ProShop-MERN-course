@@ -5,7 +5,7 @@ import { Row, Col, Form, Button } from 'react-bootstrap'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 
-import { getUserDetails } from '../actions/userActions'
+import { getUserDetails, updateUserProfile } from '../actions/userActions'
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState('')
@@ -21,6 +21,9 @@ const ProfileScreen = ({ location, history }) => {
 
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
+
+  const userUpdateProfile = useSelector(state => state.userUpdateProfile)
+  const { success } = userUpdateProfile
 
   useEffect(() => {
     if (!userInfo) {
@@ -40,7 +43,7 @@ const ProfileScreen = ({ location, history }) => {
     if (password !== confirmPassword) {
       setMessage('Passwords do not match')
     } else {
-      // Dispatch user update
+      dispatch(updateUserProfile({ id: user._id, name, email, password }))
     }
   }
 
@@ -50,6 +53,8 @@ const ProfileScreen = ({ location, history }) => {
         <h2>User Profile</h2>
         {error && <Message variant='danger'>{error}</Message>}
         {message && <Message variant='danger'>{message}</Message>}
+        {success && <Message variant='success'>Profile updated</Message>}
+
         {loading && <Loader></Loader>}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId='name'>
@@ -79,11 +84,11 @@ const ProfileScreen = ({ location, history }) => {
               onChange={e => setPassword(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Form.Group controlId='password'>
+          <Form.Group controlId='confirmPassword'>
             <Form.Label>Confirm Password</Form.Label>
             <Form.Control
               type='password'
-              placeholder='Enter password'
+              placeholder='Confirm password'
               value={confirmPassword}
               onChange={e => setConfirmPassword(e.target.value)}
             ></Form.Control>
