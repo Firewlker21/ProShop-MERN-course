@@ -5,6 +5,7 @@ import { Row, Col, Form, Button } from 'react-bootstrap'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import FormContainer from '../components/FormContainer'
+import CheckoutSteps from '../components/CheckoutSteps'
 import { login } from '../actions/userActions'
 
 const LoginScreen = ({ location, history }) => {
@@ -30,6 +31,7 @@ const LoginScreen = ({ location, history }) => {
 
   return (
     <FormContainer>
+      <CheckoutSteps step1 />
       <h1>Sign up!</h1>
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader></Loader>}
